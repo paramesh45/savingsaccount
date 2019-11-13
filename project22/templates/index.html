@@ -1,0 +1,40 @@
+<html>
+<body>
+<table align="center" border="2">
+    <tr>
+        <td><table>
+            <tr><th> EMPLOYEE REGISTRATION</th></tr>
+            <form action="{% url 'save' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <tr><td><input type="number" readonly value="{{ acno }}" name="acno"></td></tr>
+                <tr><td><input type="name" placeholder="name" required name="name"></td></tr>
+                <tr><td>account type<select name="acctype">
+                    <option>savings</option>
+                    <option>current</option>
+                </select></td></tr>
+                <tr><td><input type="number" placeholder="age" required name="age"></td></tr>
+                <tr>
+                    <td><input type="radio" value="male" placeholder="gender" checked name="s1">male
+                    <input type="radio" value="female" placeholder="gender" name="s1">female</td>
+                </tr>
+                <tr><td><input type="number" required placeholder="opening balance" name="open_bal"></td></tr>
+                <tr><td>photo <input type="file" name="image" required></td></tr>
+                <tr><td><button type="submit">save</button> </td></tr>
+            </form>
+        </table> </td>
+
+        <td><table>
+
+            <tr><th>employee deatils</th></tr>
+            {% if data %}
+                {% for x in data %}
+                    <tr><td>{{ x.acno }}</td>
+                    <td>{{ x.name }}</td>
+                    <td><img src="{{ x.photo.url }}" width="50" height="50"></td></tr>
+                {% endfor %}
+            {% endif %}
+        </table> </td>
+    </tr>
+</table>
+</body>
+</html>
